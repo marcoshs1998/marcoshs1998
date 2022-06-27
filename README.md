@@ -1,9 +1,4 @@
 Hi, I’m [@marcoshssilva](https://github.com/marcoshssilva)
 
-# commands
-
-## run RBDMS's by docker
-start default containers by docker compose-up
-```
-docker-compose -f "docker-compose.yml" up -d --build
-```
+# Links
+1. [Setting up MySQL, Postgres and SQL Server databases in Docker container](/setting-up-rbdms-docker-compose/)

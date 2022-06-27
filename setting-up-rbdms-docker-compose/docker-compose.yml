@@ -4,7 +4,8 @@ services:
   mysql-default-server:
     image: mysql
     ports:
-      - 3306:3306
+      - 3306
+      - 33060
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=mysql
@@ -18,7 +19,8 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgre
     ports:
-      - 5432:5432
+      - 5432
+      - 5433
     volumes:
       - postgres-default-server-data:/var/lib/postgresql/data
   
@@ -29,7 +31,10 @@ services:
       - SA_PASSWORD=sqlserver#2017instance
       - ACCEPT_EULA=Y
     ports:
-      - 1433:1433
+      - 1433
+      - 1434
+      - 4022
+      - 135
     volumes:
       - mssql-default-server-data:/var/opt/mssql
     
@@ -54,6 +59,7 @@ services:
       - 8086:80
     environment:
       - PMA_ARBITRARY=1
+      - PMA_HOST=mysql-default-server
     volumes:
       - phpadmin-data:/var/www/html
 
