@@ -1,17 +1,20 @@
 version: '3.4'
+name: rbdms-marcoshssilva
 
 services:
   mysql-default-server:
     image: mysql
     ports:
-      - 3306
-      - 33060
+      - 3306:3306
+      - 33060:33060
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=mysql
     command: --default-authentication-plugin=mysql_native_password
     volumes:
-      - mysql-default-server-data:/var/lib/mysql
+      - mysql-server-data:/var/lib/mysql
+    networks:
+      - mysql-network
 
   postgres-default-server:
     image: postgres
@@ -19,10 +22,11 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgre
     ports:
-      - 5432
-      - 5433
+      - 5432:5432
     volumes:
-      - postgres-default-server-data:/var/lib/postgresql/data
+      - postgres-server-data:/var/lib/postgresql/data
+    networks:
+      - pgsql-network
   
   mssql-default-server:
     image: mcr.microsoft.com/mssql/server:2017-latest
@@ -31,12 +35,11 @@ services:
       - SA_PASSWORD=sqlserver#2017instance
       - ACCEPT_EULA=Y
     ports:
-      - 1433
-      - 1434
-      - 4022
-      - 135
+      - 1433:1433
     volumes:
-      - mssql-default-server-data:/var/opt/mssql
+      - mssql-server-data:/var/opt/mssql/data
+    networks:
+      - mssql-network
     
   pgadmin-local:
     image: dpage/pgadmin4
@@ -50,6 +53,8 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=pgadmin4
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - pgsql-network
 
   phpadmin-local:
     image: phpmyadmin/phpmyadmin:latest
@@ -62,10 +67,17 @@ services:
       - PMA_HOST=mysql-default-server
     volumes:
       - phpadmin-data:/var/www/html
+    networks:
+      - mysql-network
 
 volumes:
-  phpadmin-data:
+  postgres-server-data:
   pgadmin-data:
-  postgres-default-server-data:
-  mysql-default-server-data:
-  mssql-default-server-data:
+  mysql-server-data:
+  phpadmin-data:
+  mssql-server-data:
+
+networks:
+  mysql-network:
+  mssql-network:
+  pgsql-network:
