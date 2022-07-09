@@ -58,7 +58,7 @@ services:
 
   phpadmin-local:
     image: phpmyadmin/phpmyadmin:latest
-    links:
+    depends_on:
       - mysql-default-server
     ports:
       - 8086:80
