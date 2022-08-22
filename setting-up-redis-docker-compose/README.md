@@ -5,3 +5,10 @@
 ```
 docker-compose -f "docker-compose.yml" up -d --build
 ```
+
+## Redis Password
+
+If you must set a password to redis server, add a new environment:
+```
+command: redis-server --save 20 1 --loglevel warning --requirepass YOUR_PASSWORD_HERE
+```

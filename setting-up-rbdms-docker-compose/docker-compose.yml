@@ -3,7 +3,7 @@ name: rbdms-marcoshssilva
 
 services:
   mysql-default-server:
-    image: mysql
+    image: mysql:latest
     ports:
       - 3306:3306
       - 33060:33060
@@ -16,7 +16,7 @@ services:
       - mysql-network
 
   postgres-default-server:
-    image: postgres
+    image: postgres:latest
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:

@@ -3,10 +3,10 @@ name: marcoshssilva-mysql
 
 services:
   mysql-default-server:
-    image: mysql
+    image: mysql:8-oracle
     restart: on-failure
     ports:
-      - 3306:3306
+      - 3310:3306
       - 33060:33060
     environment:
       - MYSQL_ROOT_PASSWORD=root
