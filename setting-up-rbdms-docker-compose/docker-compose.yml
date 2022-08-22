@@ -7,9 +7,8 @@ services:
     ports:
       - 3306:3306
       - 33060:33060
-    restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=mysql
+      - MYSQL_ROOT_PASSWORD=root
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - mysql-server-data:/var/lib/mysql
@@ -18,9 +17,8 @@ services:
 
   postgres-default-server:
     image: postgres
-    restart: always
     environment:
-      - POSTGRES_PASSWORD=postgre
+      - POSTGRES_PASSWORD=postgres
     ports:
       - 5432:5432
     volumes:
@@ -30,9 +28,8 @@ services:
   
   mssql-default-server:
     image: mcr.microsoft.com/mssql/server:2017-latest
-    restart: always
     environment:
-      - SA_PASSWORD=sqlserver#2017instance
+      - SA_PASSWORD=Sqlserver@2017
       - ACCEPT_EULA=Y
     ports:
       - 1433:1433
@@ -43,13 +40,13 @@ services:
     
   pgadmin-local:
     image: dpage/pgadmin4
-    restart: always
-    ports:
-      - 8085:80
+    restart: on-failure
     depends_on:
       - postgres-default-server
+    ports:
+      - 8085:80
     environment:
-      - PGADMIN_DEFAULT_EMAIL=pgadmin4@email.com
+      - PGADMIN_DEFAULT_EMAIL=admin@pgadmin.com
       - PGADMIN_DEFAULT_PASSWORD=pgadmin4
     volumes:
       - pgadmin-data:/var/lib/pgadmin
@@ -58,7 +55,8 @@ services:
 
   phpadmin-local:
     image: phpmyadmin/phpmyadmin:latest
-    links:
+    restart: on-failure
+    depends_on:
       - mysql-default-server
     ports:
       - 8086:80

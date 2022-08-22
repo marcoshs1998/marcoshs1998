@@ -1,0 +1,38 @@
+version: '3.4'
+name: marcoshssilva-postgres
+
+services:
+  postgres-default-server:
+    image: postgres
+    restart: on-failure
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-server-data:/var/lib/postgresql/data
+    networks:
+      - pgsql-network
+  
+    
+  pgadmin-local:
+    image: dpage/pgadmin4
+    restart: on-failure
+    ports:
+      - 8085:80
+    depends_on:
+      - postgres-default-server
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@pgadmin.com
+      - PGADMIN_DEFAULT_PASSWORD=pgadmin4
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - pgsql-network
+
+volumes:
+  postgres-server-data:
+  pgadmin-data:
+
+networks:
+  pgsql-network:
