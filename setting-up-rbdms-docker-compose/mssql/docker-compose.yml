@@ -20,3 +20,4 @@ volumes:
 
 networks:
   mssql-network:
+    driver: host

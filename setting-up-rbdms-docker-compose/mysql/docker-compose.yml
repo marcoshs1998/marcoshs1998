@@ -17,7 +17,7 @@ services:
       - mysql-network
 
   phpadmin-local:
-    image: phpmyadmin/phpmyadmin:latest
+    image: phpmyadmin/phpmyadmin:5.2.0-fpm-alpine
     restart: on-failure
     ports:
       - 8086:80
@@ -35,3 +35,4 @@ volumes:
 
 networks:
   mysql-network:
+    driver: host

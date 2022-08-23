@@ -36,4 +36,4 @@ volumes:
 
 networks:
   pgsql-network:
-    driver: bridge
+    driver: host
