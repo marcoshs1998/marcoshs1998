@@ -18,7 +18,7 @@ services:
       - mysql-network
 
   phpadmin-local:
-    image: phpmyadmin/phpmyadmin:5.2.0-fpm-alpine
+    image: phpmyadmin/phpmyadmin:5.2.0
     container_name: phpmyadmin-local
     restart: on-failure
     ports:
