@@ -4,6 +4,7 @@ name: marcoshssilva-postgres
 services:
   postgres-default-server:
     image: postgres:14.5-alpine
+    container_name: postgres-instance
     restart: on-failure
     environment:
       - POSTGRES_PASSWORD=postgres

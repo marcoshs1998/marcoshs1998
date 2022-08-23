@@ -4,6 +4,7 @@ name: rbdms-marcoshssilva
 services:
   mysql-default-server:
     image: mysql:latest
+    container_name: mysql-instance
     ports:
       - 3306:3306
       - 33060:33060
@@ -17,6 +18,7 @@ services:
 
   postgres-default-server:
     image: postgres:latest
+    container_name: postgres-instance
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:
@@ -28,6 +30,7 @@ services:
   
   mssql-default-server:
     image: mcr.microsoft.com/mssql/server:2017-latest
+    container_name: sqlserver-instance
     environment:
       - SA_PASSWORD=Sqlserver@2017
       - ACCEPT_EULA=Y
@@ -40,6 +43,7 @@ services:
     
   pgadmin-local:
     image: dpage/pgadmin4
+    container_name: pgadmin-local
     restart: on-failure
     depends_on:
       - postgres-default-server
@@ -55,6 +59,7 @@ services:
 
   phpadmin-local:
     image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin-local
     restart: on-failure
     depends_on:
       - mysql-default-server

@@ -4,6 +4,7 @@ name: marcoshssilva-mysql
 services:
   mysql-default-server:
     image: mysql:8-oracle
+    container_name: mysql-instance
     restart: on-failure
     ports:
       - 3310:3306

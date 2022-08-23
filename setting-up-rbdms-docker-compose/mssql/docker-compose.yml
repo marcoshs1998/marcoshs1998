@@ -4,6 +4,7 @@ name: rbdms-marcoshssilva-mssql
 services:
   mssql-default-server:
     image: mcr.microsoft.com/mssql/server:2017-latest
+    container_name: sqlserver-instance
     restart: on-failure
     environment:
       - SA_PASSWORD=Sqlserver@2017
